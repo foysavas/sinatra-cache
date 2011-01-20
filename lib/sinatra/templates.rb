@@ -30,8 +30,10 @@ module Sinatra
         cache_output_dir = settings.send(:cache_output_dir)  if settings.respond_to?(:cache_output_dir)
         # raise Exception, "The Sinatra::Cache cache_output_dir variable is pointing to a non-existant directory cache_output_dir=[#{cache_output_dir}]" unless test(?d, cache_output_dir)
         cache_option = options[:cache]
-        cache_option = true if cache_option.nil?
-        
+        if cache_option.nil?
+          cache_option = settings.respond_to?(:cache_option_default) ? settings.send(:cache_option_default) : true
+        end
+
         # compile and render template
         layout_was      = @default_layout
         @default_layout = false

@@ -638,6 +638,7 @@ module Sinatra
       
       ## CONFIGURATIONS::
       app.set :cache_enabled, false
+      app.set :cache_option_default, true
       app.set :cache_environment, :production
       app.set :cache_page_extension, '.html'
       app.set :cache_output_dir, lambda { app.public }
